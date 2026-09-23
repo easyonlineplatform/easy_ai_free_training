@@ -64,21 +64,27 @@ function gtag_report_qualified_conversion(url) {
 }
 </script>
 
-<!-- Bunny Player.js to detect video end for qualified conversion -->
-<script src="https://player.mediadelivery.net/player.js"></script>
+<!-- Bunny Player.js to detect video end for qualified conversion (documented API) -->
+<script type="text/javascript" src="//assets.mediadelivery.net/playerjs/player-0.1.0.min.js"></script>
 <script>
   (function(){
     try{
       var iframe = document.getElementById('video');
       if(!iframe) return;
-      // Initialize Bunny player when ready
-      var player = new window.Player(iframe);
-      player.on('ended', function(){
-        try{
-          sessionStorage.setItem('easyAiVideoCompleted','true');
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({event:'easy_ai_video_completed'});
-        }catch(e){}
+      // Use documented playerjs API
+      var player = new playerjs.Player(iframe);
+      // Wait for ready then listen for 'end' event
+      player.on('ready', function(){
+        player.on('end', function(){
+          try{
+            if(sessionStorage.getItem('easyAiVideoCompleted') !== 'true'){
+              sessionStorage.setItem('easyAiVideoCompleted','true');
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({event:'easy_ai_video_completed'});
+              console.log('Easy AI video completed');
+            }
+          }catch(e){/* silent */}
+        });
       });
     }catch(e){
       // Fail silently if Player.js is not available or errors occur
