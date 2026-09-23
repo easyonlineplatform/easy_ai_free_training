@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 					gtag_report_conversion(b.href);
 				} else if(typeof gtag === 'function'){
 					// If the helper isn't present but gtag exists, call conversion directly
-					gtag('event','conversion',{'send_to':'AW-18403969021/vB45CP6L3oEdEP2P2cdE'});
+					gtag('event','conversion',{'send_to':'AW-7788267006/vB45CP6L3oEdEP2P2cdE'});
 					window.location = b.href;
 				} else {
 					// Fallback: redirect immediately
