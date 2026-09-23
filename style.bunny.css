@@ -51,3 +51,32 @@
   .join-community-guide{max-width:100%;padding:0 12px}
   .join-community-guide img{max-width:100%}
 }
+
+/* Desktop-only CTA enhancements to balance the large guide image */
+@media (min-width:900px){
+  .join-community-guide .guide-text{
+    font-size:18px;
+    font-weight:800;
+  }
+
+  .btn{
+    width: min(100%, 600px);
+    margin:20px auto 0;
+    padding:22px 26px; /* vertical, horizontal */
+    gap:18px;
+  }
+
+  .btn .btn-main{
+    font-size:1.5rem;
+    font-weight:900;
+    line-height:1;
+  }
+
+  .btn .btn-sub{
+    font-size:0.95rem;
+  }
+
+  .btn .btn-arrow{
+    font-size:1.2rem;
+  }
+}
