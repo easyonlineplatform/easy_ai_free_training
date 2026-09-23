@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 						gtag_report_qualified_conversion(b.href);
 					} else if(typeof gtag === 'function'){
 						// If helper missing but gtag exists, fire qualified conversion then redirect
-						gtag('event','conversion',{'send_to':'AW-18403969021/VSPtCKOSoYIdEP2P2cdE'});
+						gtag('event','conversion',{'send_to':'AW-8489407193/VSPtCKOSoYIdEP2P2cdE'});
 						window.location = b.href;
 					} else {
 						window.location = b.href;
