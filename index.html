@@ -66,31 +66,6 @@ function gtag_report_qualified_conversion(url) {
 
 <!-- Bunny Player.js to detect video end for qualified conversion (documented API) -->
 <script type="text/javascript" src="//assets.mediadelivery.net/playerjs/player-0.1.0.min.js"></script>
-<script>
-  (function(){
-    try{
-      var iframe = document.getElementById('video');
-      if(!iframe) return;
-      // Use documented playerjs API
-      var player = new playerjs.Player(iframe);
-      // Wait for ready then listen for 'end' event
-      player.on('ready', function(){
-        player.on('end', function(){
-          try{
-            if(sessionStorage.getItem('easyAiVideoCompleted') !== 'true'){
-              sessionStorage.setItem('easyAiVideoCompleted','true');
-              window.dataLayer = window.dataLayer || [];
-              window.dataLayer.push({event:'easy_ai_video_completed'});
-              console.log('Easy AI video completed');
-            }
-          }catch(e){/* silent */}
-        });
-      });
-    }catch(e){
-      // Fail silently if Player.js is not available or errors occur
-    }
-  })();
-</script>
 
 <meta name="description" content="Join the free 2-day Easy AI Training. Learn practical AI, photo editing and graphic design skills from your phone or laptop.">
 <meta name="theme-color" content="#1d5c3d">
@@ -121,6 +96,38 @@ function gtag_report_qualified_conversion(url) {
     </iframe>
   </div>
 </section>
+
+<!-- Initialize Bunny Player after iframe exists -->
+<script>
+  (function(){
+    try{
+      var iframe = document.getElementById('video');
+      if(!iframe){
+        console.error('Bunny player init: #video iframe not found');
+        return;
+      }
+      // Use documented playerjs API
+      var player = new playerjs.Player(iframe);
+      player.on('ready', function(){
+        console.log('Bunny player ready');
+        player.on('ended', function(){
+          try{
+            if(sessionStorage.getItem('easyAiVideoCompleted') !== 'true'){
+              sessionStorage.setItem('easyAiVideoCompleted','true');
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({event:'easy_ai_video_completed'});
+              console.log('Easy AI video completed');
+            }
+          }catch(e){
+            console.error('Error handling video end', e);
+          }
+        });
+      });
+    }catch(e){
+      console.error('Bunny player initialization failed', e);
+    }
+  })();
+</script>
 
 <section class="gift">
   <div class="gift-content">
