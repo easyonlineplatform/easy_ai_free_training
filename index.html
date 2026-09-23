@@ -14,6 +14,28 @@
   gtag('config', 'AW-18403969021');
 </script>
 
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'conversion', {
+      'send_to': 'AW-18403969021/vB45CP6L3oEdEP2P2cdE',
+      'event_callback': callback
+    });
+  } else {
+    // If gtag is not available, fallback to immediate redirect
+    callback();
+  }
+
+  return false;
+}
+</script>
+
 <meta name="description" content="Join the free 2-day Easy AI Training. Learn practical AI, photo editing and graphic design skills from your phone or laptop.">
 <meta name="theme-color" content="#1d5c3d">
 <title>Free 2-Day AI Training | Easy Origin Solutions</title>
