@@ -1,4 +1,4 @@
-const CONFIG={whatsappChannelUrl:"https://whatsapp.com/channel/0029Vb9EC959WtCBohr0e30z"};
+const CONFIG={whatsappChannelUrl:"https://chat.whatsapp.com/FHLsw0TonZq1BhB7mdMAhY"};
 document.addEventListener("DOMContentLoaded",()=>{
 	document.querySelectorAll("#join1,#join2").forEach(b=>{
 		b.href=CONFIG.whatsappChannelUrl;

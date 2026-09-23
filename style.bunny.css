@@ -20,38 +20,34 @@
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:10px;
-  margin:18px auto 8px;
+  gap:12px;
+  margin:18px auto 10px;
   text-align:center;
-  padding:8px 6px;
+  width:100%;
+  box-sizing:border-box;
+  padding:0 12px;
+  max-width:760px;
 }
 .join-community-guide img{
-  width:210px;
-  max-width:56%;
-  height:auto;
-  border-radius:10px;
+  width:100%;
+  max-width:760px;
+  height:auto; /* preserve 16:9 aspect ratio */
+  border-radius:16px; /* professional rounded corners */
   pointer-events:none;
   user-select:none;
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
-  border:1px solid rgba(0,0,0,0.04);
-  background:#fff;
+  box-shadow:0 12px 36px rgba(0,0,0,0.08);
+  border:1px solid rgba(0,0,0,0.06);
+  display:block;
 }
 .join-community-guide .guide-text{
   font-weight:800;
   color:#12281d;
   font-size:15px;
-  line-height:1.2;
+  line-height:1.25;
   margin:6px 0 0;
 }
-@media (min-width:900px){
-  .join-community-guide img{width:220px}
-  .join-community-guide .guide-text{font-size:16px}
-}
-@media (max-width:680px){
-  .join-community-guide img{width:180px;max-width:48%}
-  .join-community-guide .guide-text{font-size:14px}
-}
-@media (max-width:420px){
-  .join-community-guide img{width:160px;max-width:46%}
-  .join-community-guide .guide-text{font-size:13px}
+/* Tablet / Mobile: image fills available width within the CTA card and never overflows */
+@media (max-width:900px){
+  .join-community-guide{max-width:100%;padding:0 12px}
+  .join-community-guide img{max-width:100%}
 }
