@@ -36,6 +36,56 @@ function gtag_report_conversion(url) {
 }
 </script>
 
+<script>
+function gtag_report_qualified_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+
+  if (typeof gtag === 'function') {
+    // First fire the existing base conversion (AW-7788267006), then the qualified conversion (AW-18403969021)
+    gtag('event','conversion',{
+      'send_to':'AW-7788267006/vB45CP6L3oEdEP2P2cdE',
+      'event_callback': function(){
+        gtag('event','conversion',{
+          'send_to':'AW-18403969021/VSPtCKOSoYIdEP2P2cdE',
+          'event_callback': callback
+        });
+      }
+    });
+  } else {
+    // Fallback: redirect immediately
+    callback();
+  }
+
+  return false;
+}
+</script>
+
+<!-- Bunny Player.js to detect video end for qualified conversion -->
+<script src="https://player.mediadelivery.net/player.js"></script>
+<script>
+  (function(){
+    try{
+      var iframe = document.getElementById('video');
+      if(!iframe) return;
+      // Initialize Bunny player when ready
+      var player = new window.Player(iframe);
+      player.on('ended', function(){
+        try{
+          sessionStorage.setItem('easyAiVideoCompleted','true');
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({event:'easy_ai_video_completed'});
+        }catch(e){}
+      });
+    }catch(e){
+      // Fail silently if Player.js is not available or errors occur
+    }
+  })();
+</script>
+
 <meta name="description" content="Join the free 2-day Easy AI Training. Learn practical AI, photo editing and graphic design skills from your phone or laptop.">
 <meta name="theme-color" content="#1d5c3d">
 <title>Free 2-Day AI Training | Easy Origin Solutions</title>
@@ -58,7 +108,7 @@ function gtag_report_conversion(url) {
   <div class="video">
     <iframe
       id="video"
-      src="https://player.mediadelivery.net/play/760019/eed1ac76-52e2-4fec-8f90-c429cef6f05f"
+      src="https://player.mediadelivery.net/embed/760019/eed1ac76-52e2-4fec-8f90-c429cef6f05f"
       title="How to join the free AI training"
       allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowfullscreen>

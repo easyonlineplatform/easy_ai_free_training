@@ -8,15 +8,26 @@ document.addEventListener("DOMContentLoaded",()=>{
 			window.dataLayer.push({event:"whatsapp_channel_join_clicked",cta_location:b.id==="join2"?"bottom_cta":"main_cta",destination:"whatsapp_channel"});
 			try{
 				// Attempt to call gtag conversion and let its callback redirect
-				if(typeof gtag_report_conversion === 'function'){
-					gtag_report_conversion(b.href);
-				} else if(typeof gtag === 'function'){
-					// If the helper isn't present but gtag exists, call conversion directly
-					gtag('event','conversion',{'send_to':'AW-7788267006/vB45CP6L3oEdEP2P2cdE'});
-					window.location = b.href;
-				} else {
-					// Fallback: redirect immediately
-					window.location = b.href;
+				var qualified = (sessionStorage.getItem('easyAiVideoCompleted') === 'true');
+				if(qualified){
+					if(typeof gtag_report_qualified_conversion === 'function'){
+						gtag_report_qualified_conversion(b.href);
+					} else if(typeof gtag === 'function'){
+						// If helper missing but gtag exists, fire qualified conversion then redirect
+						gtag('event','conversion',{'send_to':'AW-18403969021/VSPtCKOSoYIdEP2P2cdE'});
+						window.location = b.href;
+					} else {
+						window.location = b.href;
+					}
+				}else{
+					if(typeof gtag_report_conversion === 'function'){
+						gtag_report_conversion(b.href);
+					} else if(typeof gtag === 'function'){
+						gtag('event','conversion',{'send_to':'AW-7788267006/vB45CP6L3oEdEP2P2cdE'});
+						window.location = b.href;
+					} else {
+						window.location = b.href;
+					}
 				}
 			}catch(err){
 				window.location = b.href;
